@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.luv2code.demthycrud.dao.EmployeeRepository;
 import com.luv2code.demthycrud.entity.Employee;
 
+import org.springframework.data.domain.*;
+
 @Service
 public class EmployeeService {
 	private EmployeeRepository employeeRepository;
@@ -20,7 +22,7 @@ public class EmployeeService {
 	}
 	
 	public List<Employee> getAllEmployees()
-	{
+	{	
 		return employeeRepository.findAllByOrderByLastNameAsc();
 	}
 	
@@ -48,5 +50,12 @@ public class EmployeeService {
 	public void deleteEmployee(int theId)
 	{
 		employeeRepository.deleteById(theId);
+	}
+	
+	public Page<Employee> findPaginated(int pageNumber, int pageSize, String sortField, String sortDirection)
+	{
+		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
+		Pageable pageable = PageRequest.of(pageNumber -1, pageSize,sort);
+		return employeeRepository.findAll(pageable);
 	}
 }

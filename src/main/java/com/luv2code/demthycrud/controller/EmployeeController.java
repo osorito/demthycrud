@@ -2,6 +2,7 @@ package com.luv2code.demthycrud.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +13,8 @@ import com.luv2code.demthycrud.entity.Employee;
 import com.luv2code.demthycrud.service.EmployeeService;
 
 import jakarta.validation.Valid;
+
+
 
 @Controller
 @RequestMapping("/employees")
@@ -27,10 +30,11 @@ public class EmployeeController {
 
 	@GetMapping("list")
 	public String find(Model model)
-	{
-		List<Employee> theEmployees = employeeService.getAllEmployees();
-		model.addAttribute("employee",theEmployees);
-		return "employees/list-employees";
+	{	
+		//List<Employee> theEmployees = employeeService.getAllEmployees();
+		//model.addAttribute("employee",theEmployees);
+		//return "employees/list-employees";
+		return findPaginated(1,"lastName","asc",model);
 	}
 	
 	
@@ -69,6 +73,22 @@ public class EmployeeController {
 	{
 		employeeService.deleteEmployee(id);
 		return "redirect:/";
+	}
+	
+	@GetMapping("/page/{pageNumber}")
+	public String findPaginated(@PathVariable(value="pageNumber") int pageNumber,@RequestParam("sortField") String sortField, @RequestParam("sortDir") String sortDir, Model model)
+	{
+		int pageSize = 5;
+		Page<Employee> page = employeeService.findPaginated(pageNumber, pageSize,sortField,sortDir);
+		List<Employee> theEmployees = page.getContent(); 
+		model.addAttribute("employee",theEmployees);
+	    model.addAttribute("currentPage", pageNumber);
+	    model.addAttribute("totalPages", page.getTotalPages());
+	    model.addAttribute("totalItems", page.getTotalElements());
+	    model.addAttribute("sortField", sortField);
+	    model.addAttribute("sortDir", sortDir);
+	    model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+	    return "employees/list-employees";
 	}
 	
 }

@@ -57,9 +57,18 @@
     <table class="table table-bordered table-striped">
         <thead class="table-light">
         <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email ID</th>
+	     <th>
+	      <a th:href="@{'/employees/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
+	       First Name</a>
+	     </th>
+	     <th>
+	     <a th:href="@{'/employees/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
+	       Last Name</a>
+	     </th>
+	     <th>
+	     <a th:href="@{'/employees/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+	       Email ID</a>
+	     </th>        
         <th>Action</th>
 
         </tr>
@@ -87,6 +96,34 @@
 
         </tbody>
     </table>
+    
+
+	<div th:if="${totalPages > 1}">
+	    <div class="row col-sm-10">
+	        <div class="col-sm-2">
+	            Total Rows: [[${totalItems}]]
+	        </div>
+	        <div class="col-sm-1">
+	            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+			      <a th:if="${currentPage != i}" th:href="@{'/employees/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+			      <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+	            </span>
+	        </div>
+	       
+	         
+	        <div class="col-sm-1">
+	            <a th:if="${currentPage < totalPages}" th:href="@{'/employees/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+	            <span th:unless="${currentPage < totalPages}">Next</span>
+	        </div>
+	
+	        <div class="col-sm-1">
+	            <a th:if="${currentPage < totalPages}" th:href="@{'/employees/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+	            <span th:unless="${currentPage < totalPages}">Last</span>
+	        </div>
+	    </div>
+	</div>
+
+    
 </div>
 
 </body>
