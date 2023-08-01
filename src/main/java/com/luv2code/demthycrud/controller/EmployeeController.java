@@ -13,6 +13,7 @@ import com.luv2code.demthycrud.entity.Employee;
 import com.luv2code.demthycrud.service.EmployeeService;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Digits;
 
 
 
@@ -61,7 +62,7 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/showFormForUpdate")
-	public String showFormForUpdate(@RequestParam("employeeId") int id, Model model)
+	public String showFormForUpdate(@RequestParam("employeeId")  int id, Model model)
 	{
 		Employee employee = employeeService.getEmployeeById(id);
 		model.addAttribute("employee",employee);

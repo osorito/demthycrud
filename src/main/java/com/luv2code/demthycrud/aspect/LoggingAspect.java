@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggingAspect extends AOPExpressions{
 
-	@Around("forServicePackage() || forControllerPackage() || forDAOPackage() || forEntityPackage()")
+	@Around("forServicePackage() || forControllerPackage() || forDAOPackage() || forEntityPackage() || getter()")
 	public Object aroundMeasureTime(ProceedingJoinPoint theProceedingJoinPoint) throws Throwable
 	{
 		//print out method we are advising on 
@@ -48,7 +48,7 @@ public class LoggingAspect extends AOPExpressions{
 	
 	
 	@AfterThrowing(
-			pointcut = "forServicePackage() || forControllerPackage())",
+			pointcut = "forServicePackage() || forControllerPackage() || forDAOPackage() || forEntityPackage()",
 			throwing = "theExc"
 			)
 	private void afterThrowing(JoinPoint theJoinPoint, Throwable theExc)

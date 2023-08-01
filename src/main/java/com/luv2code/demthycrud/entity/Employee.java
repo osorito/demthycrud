@@ -38,34 +38,42 @@ public class Employee {
 	}
 
 	public int getId() {
+		System.out.println("getId()");
 		return id;
 	}
 
 	public void setId(int id) {
+		System.out.println("setId()");
 		this.id = id;
 	}
 
 	public String getFirstName() {
+		System.out.println("getFirstName()");
 		return firstName;
 	}
 
 	public void setFirstName(String firstName) {
+		System.out.println("setFirstName()");
 		this.firstName = firstName;
 	}
 
 	public String getLastName() {
+		System.out.println("getLastName()");
 		return lastName;
 	}
 
 	public void setLastName(String lastName) {
+		System.out.println("setLastName()");
 		this.lastName = lastName;
 	}
 
 	public String getEmail() {
+		System.out.println("getEmail()");
 		return email;
 	}
 
 	public void setEmail(String email) {
+		System.out.println("setEmail()");
 		this.email = email;
 	}
 

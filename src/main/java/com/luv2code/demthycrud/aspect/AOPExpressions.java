@@ -19,4 +19,7 @@ public class AOPExpressions {
 	@Pointcut("execution(* com.luv2code.demthycrud.entity.*.*(..))")
 	public void forEntityPackage() {}
 	
+	@Pointcut("execution(* com.luv2code.demthycrud.*.*.*(..))")
+	public void getter() {}
+	
 }
