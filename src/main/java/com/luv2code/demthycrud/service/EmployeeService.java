@@ -56,6 +56,6 @@ public class EmployeeService {
 	{
 		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
 		Pageable pageable = PageRequest.of(pageNumber -1, pageSize,sort);
-		return employeeRepository.findAllByOrderByFirstName(pageable);//.findAll(pageable);
+		return employeeRepository.findAll(pageable);
 	}
 }

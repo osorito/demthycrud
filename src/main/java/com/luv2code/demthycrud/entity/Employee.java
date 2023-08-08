@@ -1,5 +1,9 @@
 package com.luv2code.demthycrud.entity;
 
+
+
+
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -7,6 +11,7 @@ import jakarta.validation.constraints.*;
 @Entity
 @Table(name="employee")
 public class Employee {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
@@ -38,42 +43,42 @@ public class Employee {
 	}
 
 	public int getId() {
-		System.out.println("getId()");
+		//System.out.println("getId()");
 		return id;
 	}
 
 	public void setId(int id) {
-		System.out.println("setId()");
+		//System.out.println("setId()");
 		this.id = id;
 	}
 
 	public String getFirstName() {
-		System.out.println("getFirstName()");
+		//System.out.println("getFirstName()");
 		return firstName;
 	}
 
 	public void setFirstName(String firstName) {
-		System.out.println("setFirstName()");
+		//System.out.println("setFirstName()");
 		this.firstName = firstName;
 	}
 
 	public String getLastName() {
-		System.out.println("getLastName()");
+		//System.out.println("getLastName()");
 		return lastName;
 	}
 
 	public void setLastName(String lastName) {
-		System.out.println("setLastName()");
+		//System.out.println("setLastName()");
 		this.lastName = lastName;
 	}
 
 	public String getEmail() {
-		System.out.println("getEmail()");
+		//System.out.println("getEmail()");
 		return email;
 	}
 
 	public void setEmail(String email) {
-		System.out.println("setEmail()");
+		//System.out.println("setEmail()");
 		this.email = email;
 	}
 

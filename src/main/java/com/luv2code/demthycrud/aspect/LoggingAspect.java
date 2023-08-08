@@ -5,7 +5,11 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+
+
 
 
 @Aspect
@@ -29,10 +33,7 @@ public class LoggingAspect extends AOPExpressions{
 		}
 		catch(Exception e)
 		{
-			//log the exception
 			System.out.println(e.getMessage());
-			//result = "Major accident! But no worries, your private AOP helicopeter is on the way! ";
-			//give user a custom message
 			throw e;
 		}
 		
@@ -60,5 +61,30 @@ public class LoggingAspect extends AOPExpressions{
 		// log the exception
 			System.out.println("\n=====>>> The exception is: " + theExc);
 	}
+	
+	
+	
+	
+	@Before("getter()")
+	public void beforeAddAccountAdvice(JoinPoint theJoinPoint)
+	{
+		System.out.println("\n=====>> Executing @Before advice ");
+		
+		
+		// display the method signature
+		MethodSignature methodSignature = (MethodSignature)theJoinPoint.getSignature();
+		System.out.println("Method: " + methodSignature);
+		//display method arguments
+		
+		// get args
+		Object[] args = theJoinPoint.getArgs();
+		//loop the args
+		for(Object tempArg:args)
+		{
+			System.out.println(tempArg);
+
+		}
+	}
+	
 	
 }
